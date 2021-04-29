@@ -45,8 +45,9 @@ class checker(QWidget):
 
     def faceCheck(self):
         global candidate
-        candidate = list(reversed(face_recog.your_face()))
-        print(candidate)
+        candidate = 0
+        #candidate = list(reversed(face_recog.your_face()))
+        #print(candidate)
     
 
     def yes(self):

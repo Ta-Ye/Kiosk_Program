@@ -11,6 +11,7 @@ app = QApplication(sys.argv)
 import dangol_order
 import dangol_check
 import dangol_register
+import dangol
 import pay
 from menu import *
 from dangol import *
@@ -186,22 +187,22 @@ class old(QWidget):
         self.old_rec_ok.clicked.connect(lambda: main_window.Set_OldB())
 
     def refresh(self):
-        prefer = getMenusByAge(age_result)
-        
-        self.old_rec_menu1.setStyleSheet("background-image:url(../image/old/" + str(prefer[0]["menuNum"]) + ".PNG)")
-        self.old_rec_menu2.setStyleSheet("background-image:url(../image/old/" + str(prefer[1]["menuNum"]) + ".PNG)")
-        self.old_rec_menu3.setStyleSheet("background-image:url(../image/old/" + str(prefer[2]["menuNum"]) + ".PNG)")
-        self.old_rec_menu4.setStyleSheet("background-image:url(../image/old/" + str(prefer[3]["menuNum"]) + ".PNG)")
-        self.old_rec_ok.setStyleSheet("background-image:url(../image/old/old_rec_ok.PNG)")
+        prefer = getMenusByAge(pay.STORENAME, pay.STOREKEY,age_result)
+        if len(prefer)==4:
+            self.old_rec_menu1.setStyleSheet("background-image:url(../image/old/" + str(int(prefer[0].get("menuNum"))-1) + ".PNG)")
+            self.old_rec_menu2.setStyleSheet("background-image:url(../image/old/" + str(int(prefer[1].get("menuNum"))-1) + ".PNG)")
+            self.old_rec_menu3.setStyleSheet("background-image:url(../image/old/" + str(int(prefer[2].get("menuNum"))-1) + ".PNG)")
+            self.old_rec_menu4.setStyleSheet("background-image:url(../image/old/" + str(int(prefer[3].get("menuNum"))-1) + ".PNG)")
+            self.old_rec_ok.setStyleSheet("background-image:url(../image/old/old_rec_ok.PNG)")
 
-        self.old_rec_menu1.clicked.connect(
-            lambda: self.click_event(int(prefer[0]["menuNum"])))
-        self.old_rec_menu2.clicked.connect(
-            lambda: self.click_event(int(prefer[1]["menuNum"])))
-        self.old_rec_menu3.clicked.connect(
-            lambda: self.click_event(int(prefer[2]["menuNum"])))
-        self.old_rec_menu4.clicked.connect(
-            lambda: self.click_event(int(prefer[3]["menuNum"])))
+            self.old_rec_menu1.clicked.connect(
+                lambda: self.click_event(int(prefer[0]["menuNum"])))
+            self.old_rec_menu2.clicked.connect(
+                lambda: self.click_event(int(prefer[1]["menuNum"])))
+            self.old_rec_menu3.clicked.connect(
+                lambda: self.click_event(int(prefer[2]["menuNum"])))
+            self.old_rec_menu4.clicked.connect(
+                lambda: self.click_event(int(prefer[3]["menuNum"])))
 
 
     def click_event(self, num):
@@ -1100,6 +1101,9 @@ class Main(QMainWindow):
         d_register.dg_register.clicked.connect(self.dg_ok)
         d_register.dg_back.clicked.connect(self.match_age)
 
+        self.storesubmit.clicked.connect(self.storeSubmit)
+        self.warn.hide()
+
     #단골 등록
     def dg_reg(self):
         d_register.running = True
@@ -1206,6 +1210,14 @@ class Main(QMainWindow):
     def Set_OldB(self):
         self.stackedWidget.insertWidget(2, old_bb)
         self.stackedWidget.setCurrentIndex(2)
+
+    def storeSubmit(self):
+        pay.STOREKEY = self.storekey.toPlainText()
+        pay.STORENAME = self.storecode.toPlainText()
+        if dangol.check(pay.STORENAME, pay.STOREKEY):
+            self.Store.hide()
+        else:
+            self.warn.show()
 
 
 load()

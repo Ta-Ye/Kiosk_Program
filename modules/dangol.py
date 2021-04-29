@@ -32,8 +32,8 @@ def getMenusByAge(name, key, age):
     agedict[0] = "young"
     agedict[1] = "middle"
     agedict[2] = "old"
-    res = requests.get('http://127.0.0.1:80/api/menu/favorite/age/' + str(agedict[age]), auth=HTTPBasicAuth(name, key))
-    return res.text
+    res = requests.get('http://192.168.0.12:80/api/menu/favorite/age/' + str(agedict[age]), auth=HTTPBasicAuth(name, key))
+    return json.loads(res.text)
 
 def addOrderForAge(basket, age, name, key):
     agedict = dict()
@@ -43,7 +43,12 @@ def addOrderForAge(basket, age, name, key):
     order = [ menu+1 for num, menu, side_list, side, drink in basket ]
     headers = {'Content-Type': 'application/json; chearset=utf-8'}
     data = {'order': order, 'age': agedict[age]}
-    res = requests.post('http://127.0.0.1:80/order/insert', data=json.dumps(data), headers=headers, auth=HTTPBasicAuth(name, key))
+    res = requests.post('http://192.168.0.12:80/api/order/insert', data=json.dumps(data), headers=headers, auth=HTTPBasicAuth(name, key))
+
+def check(name, key):
+    if len(requests.get('http://192.168.0.12:80/api/authcheck', auth=HTTPBasicAuth(name, key)).text)==4:
+        return True
+    return False
 
 member_dict=dict()
 

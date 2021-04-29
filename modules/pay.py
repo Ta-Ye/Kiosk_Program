@@ -9,8 +9,8 @@ from menu import *
 
 pay_UI = '../_uiFiles/final_payment.ui'
 
-STOREKEY = ""
-STORENAEM = ""
+STOREKEY = "1234"
+STORENAME = "1234"
 
 class payment(QWidget):
     def __init__(self):
@@ -70,8 +70,7 @@ class payment(QWidget):
         if self.member!="":
             member_dict[self.member].add_order(self.basket,self.cost)
             write(self.member, self.age_result, self.cost, member_dict[self.member].number, self.basket)
-        age_list[self.age_result].add_order(self.basket)
-        addOrderForAge(self.basket, self.age_result, STOREKEY)
+        addOrderForAge(self.basket, self.age_result, STORENAME ,STOREKEY)
         self.hide()
     
 
