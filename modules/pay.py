@@ -10,6 +10,7 @@ from menu import *
 pay_UI = '../_uiFiles/final_payment.ui'
 
 STOREKEY = ""
+STORENAEM = ""
 
 class payment(QWidget):
     def __init__(self):

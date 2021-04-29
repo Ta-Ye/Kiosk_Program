@@ -1,4 +1,5 @@
 import requests
+from requests.auth import HTTPBasicAuth
 import json
 
 class member:
@@ -26,23 +27,23 @@ class member:
                 self.prefer[(menu, tuple(side_list), side, drink)]=num
         self.point+=price//100 # 예를 들어 1%의 포인트 적립
 
-def getMenusByAge(age):
+def getMenusByAge(name, key, age):
     agedict = dict()
     agedict[0] = "young"
     agedict[1] = "middle"
     agedict[2] = "old"
-    res = requests.get('http://127.0.0.1:80/menu/favorite/age/' + str(agedict[age]))
+    res = requests.get('http://127.0.0.1:80/api/menu/favorite/age/' + str(agedict[age]), auth=HTTPBasicAuth(name, key))
     return res.text
 
-def addOrderForAge(basket,age,key):
+def addOrderForAge(basket, age, name, key):
     agedict = dict()
     agedict[0] = "young"
     agedict[1] = "middle"
     agedict[2] = "old"
     order = [ menu+1 for num, menu, side_list, side, drink in basket ]
     headers = {'Content-Type': 'application/json; chearset=utf-8'}
-    data = {'order': order, 'age': agedict[age], 'key': key}
-    res = requests.post('http://127.0.0.1:80/order/insert', data=json.dumps(data), headers=headers)
+    data = {'order': order, 'age': agedict[age]}
+    res = requests.post('http://127.0.0.1:80/order/insert', data=json.dumps(data), headers=headers, auth=HTTPBasicAuth(name, key))
 
 member_dict=dict()
 
