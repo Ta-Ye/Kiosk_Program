@@ -37,5 +37,5 @@
 
 | BackOffice와 연동 | 연령대 판별 및 주문 |
 |------|------|
-| ![Imgur](https://i.imgur.com/CVasi3L.gifv) | ![Imgur](https://i.imgur.com/74uJTz7.gifv) |
+| ![Imgur](https://imgur.com/CVasi3L) | ![Imgur](https://i.imgur.com/74uJTz7.gifv) |
 | ![Imgur](https://i.imgur.com/yLMPdB5.gifv) | ![Imgur](https://i.imgur.com/6E2jW8G.gifv) |
