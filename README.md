@@ -2,6 +2,12 @@
 <hr>
 사람의 얼굴 나이를 판단해 연령대에 맞는 화면을 제공하는 키오스크
 
+관련 URL
+
+<a src="https://github.com/Ta-Ye/Age-Detection-using-Xception">얼굴나이 판별 딥러닝 모델</a>
+
+<a src="https://github.com/Ta-Ye/Kiosk-Server">키오스크 서버 및 백오피스</a>
+
 | :back: Program | :globe_with_meridians: Age-Detection | :package: Face-Recognition |
 |------|---|---|
 |![pyqt](https://img.shields.io/badge/PyQt-v5.15.4-blue) | ![opencv](https://img.shields.io/badge/openCV-v4.5.2.52-blueviolet) ![tensorflow](https://img.shields.io/badge/tensorflow-v2.2-blueviolet)| ![dlib](https://img.shields.io/badge/dlib-v19.19.0-orange)|
